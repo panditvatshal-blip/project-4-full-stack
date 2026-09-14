@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DecodeLabs \u00B7 Intern Directory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- Sidebar -->
+    <aside class="rail">
+      <div class="rail-brand">
+        <span class="rail-mark">DL</span>
+        <div class="rail-brand-text">
+          <strong>DecodeLabs</strong>
+          <span>Project 4 \u00B7 Integration</span>
+        </div>
+      </div>
+
+      <nav class="rail-nav">
+        <span class="rail-nav-active">Interns</span>
+      </nav>
+
+      <div class="rail-status">
+        <span id="connDot" class="dot dot--pending"></span>
+        <span id="connLabel">Checking backend\u2026</span>
+      </div>
+
+      <div class="rail-meta">
+        <p>Frontend origin</p>
+        <code id="feOrigin">\u2014</code>
+        <p>API base</p>
+        <code id="apiBase">\u2014</code>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="stage">
+
+      <header class="stage-head">
+        <div>
+          <h1>Intern Directory</h1>
+          <p class="subhead">Every action below is a real HTTP round trip \u2014 open your console to watch the request/response cycle.</p>
+        </div>
+        <button id="simulateErrorBtn" class="btn btn--ghost" type="button">Simulate a failed request</button>
+      </header>
+
+      <!-- Error banner (hidden by default) -->
+      <div id="errorBanner" class="banner banner--error" hidden>
+        <span id="errorText"></span>
+        <button id="errorRetry" class="banner-action" type="button">Retry</button>
+        <button id="errorDismiss" class="banner-dismiss" type="button" aria-label="Dismiss">\u00D7</button>
+      </div>
+
+      <!-- Add intern form -->
+      <section class="panel">
+        <h2>Add an intern</h2>
+        <form id="addForm" class="add-form" novalidate>
+          <div class="field">
+            <label for="fName">Name</label>
+            <input id="fName" name="name" type="text" placeholder="Ananya Gupta" required />
+          </div>
+          <div class="field">
+            <label for="fEmail">Email</label>
+            <input id="fEmail" name="email" type="email" placeholder="ananya@example.com" required />
+          </div>
+          <div class="field">
+            <label for="fRole">Role</label>
+            <input id="fRole" name="role" type="text" placeholder="Frontend Intern" required />
+          </div>
+          <div class="field">
+            <label for="fContact">Contact <span class="optional">(optional)</span></label>
+            <input id="fContact" name="contact" type="text" placeholder="98765 43210" />
+          </div>
+          <button class="btn btn--primary" type="submit">
+            <span class="btn-label">Add intern</span>
+            <span class="btn-spinner" hidden></span>
+          </button>
+        </form>
+      </section>
+
+      <!-- Directory -->
+      <section class="panel panel--flush">
+        <div class="panel-head">
+          <h2>All interns</h2>
+          <div class="filter">
+            <label for="roleFilter">Filter by role</label>
+            <input id="roleFilter" type="text" placeholder="e.g. backend" />
+          </div>
+        </div>
+
+        <div id="tableWrap" class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th class="col-id">ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Contact</th>
+                <th class="col-actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="internsBody">
+              <!-- rows injected by script.js -->
+            </tbody>
+          </table>
+
+          <div id="emptyState" class="empty-state" hidden>
+            <p>No interns match this filter.</p>
+          </div>
+
+          <div id="loadingState" class="loading-state">
+            <span class="spinner"></span>
+            <p>Fetching interns from the backend\u2026</p>
+          </div>
+        </div>
+      </section>
+
+      <footer class="stage-foot">
+        <span>GET \u00B7 POST \u00B7 PUT \u00B7 PATCH \u00B7 DELETE all wired to a live Express API</span>
+      </footer>
+    </main>
+  </div>
+
+  <template id="rowTemplate">
+    <tr>
+      <td class="col-id"><code></code></td>
+      <td class="cell-name"></td>
+      <td class="cell-email"></td>
+      <td class="cell-role"></td>
+      <td class="cell-contact"></td>
+      <td class="col-actions">
+        <button class="btn btn--small btn--edit" type="button">Edit</button>
+        <button class="btn btn--small btn--danger btn--delete" type="button">Delete</button>
+      </td>
+    </tr>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
