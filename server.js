@@ -69,6 +69,14 @@ function withDelay(fn) {
 
 // --- Routes -----------------------------------------------------------
 
+// Friendly root route - the API itself has no homepage, just endpoints
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "DecodeLabs Project 4 API is running.",
+    try_these: ["/api/health", "/api/interns"],
+  });
+});
+
 // Health check
 app.get("/api/health", (req, res) => {
   res.status(200).json({ status: "ok", uptime: process.uptime() });
